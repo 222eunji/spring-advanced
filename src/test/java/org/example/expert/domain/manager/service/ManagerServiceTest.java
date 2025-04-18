@@ -38,15 +38,21 @@ class ManagerServiceTest {
     @InjectMocks
     private ManagerService managerService;
 
+    /**
+     * Lv3.테스트코드 연습-2: 1번 케이스
+     * getManagers에서 투두가 없다면 InvalidRequestException 발생
+     * 때문에 테스트 코드 메서드명은 NPE가 아닌 InvalidRequestException으로 수정
+     * assertEquals의 기대 메세지를 getManagers와 동일하게 변경
+     */
     @Test
-    public void manager_목록_조회_시_Todo가_없다면_NPE_에러를_던진다() {
+    public void manager_목록_조회_시_Todo가_없다면_InvalidRequestException_에러를_던진다() {
         // given
         long todoId = 1L;
         given(todoRepository.findById(todoId)).willReturn(Optional.empty());
 
         // when & then
         InvalidRequestException exception = assertThrows(InvalidRequestException.class, () -> managerService.getManagers(todoId));
-        assertEquals("Manager not found", exception.getMessage());
+        assertEquals("Todo not found", exception.getMessage());
     }
 
     @Test

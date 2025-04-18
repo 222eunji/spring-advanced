@@ -27,7 +27,7 @@ public class AuthService {
     public SignupResponse signup(SignupRequest signupRequest) {
 
         /**
-         * Lv1.코드개선1:이메일 검증 후 비밀번호 encode 동작
+         * Lv1.코드개선1:이메일 검증 후 비밀번호 encode 동작으로 순서 변경
          */
         if (userRepository.existsByEmail(signupRequest.getEmail())) {
             throw new InvalidRequestException("이미 존재하는 이메일입니다.");
